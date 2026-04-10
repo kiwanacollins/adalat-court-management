@@ -37,6 +37,7 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+/data/users.dev.json
 
 # vercel
 .vercel

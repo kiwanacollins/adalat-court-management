@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 
 function LawyersPage(props) {
-  const { profiles } = props;
+  const { profiles, dbUnavailable } = props;
   const parsedProfiles = JSON.parse(profiles);
 
   return (
@@ -19,6 +19,12 @@ function LawyersPage(props) {
       </Head>
       <div className="max-w-6xl mx-auto px-4">
         <h4 className="w-full text-3xl font-bold mt-8 mb-4">List of Lawyers</h4>
+        {dbUnavailable && (
+          <p className="mb-4 rounded-md bg-yellow-100 px-4 py-3 text-yellow-800">
+            Lawyer data is unavailable. Configure MongoDB in .env.local to load
+            records.
+          </p>
+        )}
         <table className="min-w-full border-collapse block md:table">
           <thead className="block md:table-header-group">
             <tr className="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
@@ -59,16 +65,26 @@ function LawyersPage(props) {
 }
 
 export async function getStaticProps() {
-  const client = await connectToDatabase();
-  const allLawyerProfiles = await getAllLawyerProfiles(client);
+  try {
+    const client = await connectToDatabase();
+    const allLawyerProfiles = await getAllLawyerProfiles(client);
 
-  const data = JSON.stringify(allLawyerProfiles);
+    const data = JSON.stringify(allLawyerProfiles);
 
-  return {
-    props: {
-      profiles: data,
-    },
-  };
+    return {
+      props: {
+        profiles: data,
+        dbUnavailable: false,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        profiles: JSON.stringify([]),
+        dbUnavailable: true,
+      },
+    };
+  }
 }
 
 export default LawyersPage;

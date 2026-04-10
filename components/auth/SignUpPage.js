@@ -14,7 +14,7 @@ async function createUser(email, password, firstName, lastName) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(response.message || 'Something went wrong');
+    throw new Error(data.message || 'Something went wrong');
   }
 
   return data;
@@ -41,14 +41,20 @@ function SignUpPage(props) {
       !enteredEmail ||
       enteredEmail.trim() === '' ||
       !enteredEmail.includes('@') ||
+      !enteredPassword ||
+      enteredPassword.trim().length < 7 ||
       !enteredFirstName ||
       enteredFirstName.trim() === '' ||
       !enteredLastName ||
       enteredLastName.trim() === ''
     ) {
       setIsInvalid(true);
+      toast.dismiss(toastId);
+      toast.error('Please enter valid information. Password must be 7+ chars.');
       return;
     }
+
+    setIsInvalid(false);
 
     try {
       const response = await createUser(
@@ -60,14 +66,20 @@ function SignUpPage(props) {
       console.log(response);
       toast.dismiss(toastId);
       toast.success("You're in 🤘🏼");
+
+      emailInputRef.current.value = '';
+      fnameInputRef.current.value = '';
+      lnameInputRef.current.value = '';
+      passwordInputRef.current.value = '';
+
+      if (props.onAccountCreated) {
+        props.onAccountCreated();
+      }
     } catch (error) {
       console.log(error);
+      toast.dismiss(toastId);
+      toast.error(error.message || 'Account creation failed');
     }
-
-    emailInputRef.current.value = '';
-    fnameInputRef.current.value = '';
-    lnameInputRef.current.value = '';
-    passwordInputRef.current.value = '';
   }
 
   return (

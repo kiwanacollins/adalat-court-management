@@ -29,30 +29,49 @@ function LawyerProfile(props) {
 export async function getStaticProps(context) {
   const lawyerId = context.params.lawyerId;
 
-  const client = await connectToDatabase();
+  try {
+    const client = await connectToDatabase();
 
-  const profile = await getLawyerId(client, lawyerId);
-  const data = JSON.stringify(profile);
+    const profile = await getLawyerId(client, lawyerId);
+    if (!profile) {
+      return {
+        notFound: true,
+      };
+    }
 
-  return {
-    props: {
-      profile: data,
-    },
-  };
+    const data = JSON.stringify(profile);
+
+    return {
+      props: {
+        profile: data,
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 }
 
 export async function getStaticPaths() {
-  const client = await connectToDatabase();
+  try {
+    const client = await connectToDatabase();
 
-  const profiles = await getAllLawyerProfiles(client);
-  const paths = profiles.map((p) => ({
-    params: { lawyerId: p.bar_council_id.toString() },
-  }));
+    const profiles = await getAllLawyerProfiles(client);
+    const paths = profiles.map((p) => ({
+      params: { lawyerId: p.bar_council_id.toString() },
+    }));
 
-  return {
-    paths: paths,
-    fallback: 'blocking',
-  };
+    return {
+      paths: paths,
+      fallback: 'blocking',
+    };
+  } catch (error) {
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
+  }
 }
 
 export default LawyerProfile;

@@ -15,7 +15,11 @@ function SignUp() {
   return (
     <Fragment>
       {/* Switch forms */}
-      {!isLogin ? <SignUpPage /> : <LoginPage />}
+      {!isLogin ? (
+        <SignUpPage onAccountCreated={() => setIsLogin(true)} />
+      ) : (
+        <LoginPage />
+      )}
 
       {/* Switching from login to signuo vice-versa */}
       <div className="flex flex-wrap items-center justify-center my-4">
