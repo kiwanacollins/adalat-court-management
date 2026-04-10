@@ -7,7 +7,7 @@ import { getSession } from 'next-auth/client';
 import toast from 'react-hot-toast';
 
 function CaseDetailsPage(props) {
-  const parsedFees = JSON.parse(props.fees);
+  const parsedFees = JSON.parse(props.fees) || {};
   const parsedData = JSON.parse(props.caseDetail);
 
   const router = useRouter();
@@ -82,7 +82,7 @@ export async function getServerSideProps(context) {
   const feeResponse = await db
     .collection('lawyersList')
     .findOne({ name: parsedData.Lawyer_Name });
-  const stringifyFee = JSON.stringify(feeResponse);
+  const stringifyFee = JSON.stringify(feeResponse || {});
   return {
     props: {
       caseDetail: stringifiedData,
