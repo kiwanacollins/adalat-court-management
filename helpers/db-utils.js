@@ -1,16 +1,24 @@
 import { MongoClient, ObjectID } from 'mongodb';
 
-// const username = process.env.MONGODB_USERNAME;
-// const password = process.env.MONGODB_PASSWORD;
-// const cluster = process.env.MONGODB_CLUSTER;
-// const database = process.env.MONGODB_DATABASE;
+const username = process.env.MONGODB_USERNAME;
+const password = process.env.MONGODB_PASSWORD;
+const cluster = process.env.MONGODB_CLUSTER;
+const database = process.env.MONGODB_DATABASE;
 
-// const MONGODB_URI = `mongodb+srv://${username}:${password}@${cluster}.3svps.mongodb.net/${database}?retryWrites=true&w=majority`;
+const MONGODB_URI_FROM_PARTS =
+  username && password && cluster && database
+    ? `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${database}?retryWrites=true&w=majority`
+    : undefined;
 
-const MONGODB_URI =
-  'mongodb+srv://Judiciary:iglAHqSvAgRfBqFR@cluster0.a6qwp.mongodb.net/MyFirstDatabase?retryWrites=true&w=majority';
+const MONGODB_URI = process.env.MONGODB_URI || MONGODB_URI_FROM_PARTS;
 
 export async function connectToDatabase() {
+  if (!MONGODB_URI) {
+    throw new Error(
+      'Missing MongoDB configuration. Set MONGODB_URI or MONGODB_USERNAME, MONGODB_PASSWORD, MONGODB_CLUSTER, and MONGODB_DATABASE.'
+    );
+  }
+
   const client = await MongoClient.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
