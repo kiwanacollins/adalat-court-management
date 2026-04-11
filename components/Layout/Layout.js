@@ -17,7 +17,7 @@ function Layout(props) {
 
   return (
     <Fragment>
-      <nav className="bg-[#0f172a] shadow-lg sticky top-0 z-50">
+      <nav className="bg-[#0f172a] text-gray-100 shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex justify-between h-16 items-center">
             {/* Logo */}
@@ -28,7 +28,7 @@ function Layout(props) {
                 </svg>
                 <span className="hidden sm:block text-sm leading-tight">
                   <span className="block font-bold">E-Judiciary CMS</span>
-                  <span className="block text-xs text-slate-400 font-normal">Lwengo Grade I Magistrate&apos;s Court</span>
+                  <span className="block text-xs text-gray-300 font-normal">Lwengo Grade I Magistrate&apos;s Court</span>
                 </span>
               </a>
             </Link>
@@ -37,26 +37,26 @@ function Layout(props) {
             {session && (
               <div className="hidden md:flex items-center gap-1">
                 <Link href="/dashboard">
-                  <a className="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                  <a className="text-gray-200 hover:text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
                     Dashboard
                   </a>
                 </Link>
                 {canManageCases && (
                   <Link href="/dashboard/AddCases">
-                    <a className="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                    <a className="text-gray-200 hover:text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
                       Register Case
                     </a>
                   </Link>
                 )}
                 {canManageCases && (
                   <Link href="/dashboard/reports">
-                    <a className="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                    <a className="text-gray-200 hover:text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
                       Reports
                     </a>
                   </Link>
                 )}
                 <Link href="/dashboard/notifications">
-                  <a className="text-slate-300 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                  <a className="text-gray-200 hover:text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">
                     Notifications
                   </a>
                 </Link>
@@ -69,7 +69,7 @@ function Layout(props) {
                 <>
                   <div className="text-right">
                     <p className="text-white text-sm font-medium leading-tight">{session.user.name || session.user.email}</p>
-                    <p className="text-slate-400 text-xs capitalize">{ROLE_LABELS[role] || role}</p>
+                    <p className="text-gray-300 text-xs capitalize">{ROLE_LABELS[role] || role}</p>
                   </div>
                   <button
                     onClick={signOut}
@@ -90,7 +90,7 @@ function Layout(props) {
 
             {/* Mobile hamburger */}
             <button
-              className="md:hidden text-slate-300 hover:text-white p-2"
+              className="md:hidden text-gray-200 hover:text-white p-2"
               onClick={() => setMobileOpen(!mobileOpen)}
             >
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -104,21 +104,21 @@ function Layout(props) {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="md:hidden bg-[#1e293b] border-t border-slate-700 px-4 py-3 space-y-1">
+          <div className="md:hidden bg-[#1e293b] border-t border-gray-700 px-4 py-3 space-y-1">
             {session && (
               <>
-                <div className="py-2 border-b border-slate-700 mb-2">
+                <div className="py-2 border-b border-gray-700 mb-2">
                   <p className="text-white text-sm font-medium">{session.user.name || session.user.email}</p>
-                  <p className="text-slate-400 text-xs capitalize">{ROLE_LABELS[role] || role}</p>
+                  <p className="text-gray-300 text-xs capitalize">{ROLE_LABELS[role] || role}</p>
                 </div>
-                <Link href="/dashboard"><a className="block text-slate-300 hover:text-white py-2 text-sm">Dashboard</a></Link>
+                <Link href="/dashboard"><a className="block text-gray-200 hover:text-white py-2 text-sm">Dashboard</a></Link>
                 {canManageCases && (
-                  <Link href="/dashboard/AddCases"><a className="block text-slate-300 hover:text-white py-2 text-sm">Register Case</a></Link>
+                  <Link href="/dashboard/AddCases"><a className="block text-gray-200 hover:text-white py-2 text-sm">Register Case</a></Link>
                 )}
                 {canManageCases && (
-                  <Link href="/dashboard/reports"><a className="block text-slate-300 hover:text-white py-2 text-sm">Reports</a></Link>
+                  <Link href="/dashboard/reports"><a className="block text-gray-200 hover:text-white py-2 text-sm">Reports</a></Link>
                 )}
-                <Link href="/dashboard/notifications"><a className="block text-slate-300 hover:text-white py-2 text-sm">Notifications</a></Link>
+                <Link href="/dashboard/notifications"><a className="block text-gray-200 hover:text-white py-2 text-sm">Notifications</a></Link>
                 <button onClick={signOut} className="w-full text-left text-red-400 hover:text-red-300 py-2 text-sm">Sign Out</button>
               </>
             )}

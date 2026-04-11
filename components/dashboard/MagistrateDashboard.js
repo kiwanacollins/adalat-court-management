@@ -61,18 +61,18 @@ export default function MagistrateDashboard({ cases: allCases, userName, userEma
       {/* Header */}
       <div className="bg-[#0f172a]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-          <p className="text-slate-400 text-xs uppercase tracking-widest mb-1">
+          <p className="text-gray-300 text-xs uppercase tracking-widest mb-1">
             {new Date().toLocaleDateString('en-UG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
           <h1 className="text-white text-2xl sm:text-3xl font-bold">
             Good {new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 17 ? 'afternoon' : 'evening'},{' '}
             <span className="text-blue-400">{userName.split(' ')[0]}</span>
           </h1>
-          <p className="text-slate-400 text-sm mt-1">Magistrate · Lwengo Grade I Magistrate&apos;s Court</p>
+          <p className="text-gray-200 text-sm mt-1">Magistrate · Lwengo Grade I Magistrate&apos;s Court</p>
         </div>
 
         {/* Stat strip */}
-        <div className="border-t border-slate-700">
+        <div className="border-t border-gray-700">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
             <StatCard label="Assigned Cases" value={myCases.length} color="bg-blue-900/50 text-white" icon="📁" />
             <StatCard label="Today's Hearings" value={todayHearings.length} color="bg-amber-900/50 text-white" icon="⚖️" />
