@@ -1,0 +1,33 @@
+
+> inspirathon_adalat@0.1.0 dev
+> next dev -p 3001
+
+ready - started server on 0.0.0.0:3001, url: http://localhost:3001
+info  - Loaded env from /Users/kiwana/projects/court-management-system/.env.local
+Browserslist: caniuse-lite is outdated. Please run:
+npx browserslist@latest --update-db
+
+Why you should do it regularly:
+https://github.com/browserslist/browserslist#browsers-data-updating
+> [PWA] PWA support is disabled
+event - compiled successfully in 3.5s (232 modules)
+wait  - compiling /dashboard...
+event - compiled successfully in 202 ms (250 modules)
+wait  - compiling /api/auth/[...nextauth] (server only)...
+event - compiled successfully in 461 ms (252 modules)
+[next-auth][warn][jwt_auto_generated_signing_key] 
+https://next-auth.js.org/warnings#jwt_auto_generated_signing_key
+wait  - compiling /dashboard...
+event - compiled successfully in 353 ms (269 modules)
+wait  - compiling /dashboard/AddCases (client only)...
+event - compiled successfully in 477 ms (260 modules)
+wait  - compiling /dashboard/AddCases...
+event - compiled successfully in 337 ms (281 modules)
+wait  - compiling /api/users/magistrates (server only)...
+event - compiled successfully in 311 ms (293 modules)
+wait  - compiling / (client only)...
+event - compiled successfully in 304 ms (300 modules)
+wait  - compiling /_error...
+event - compiled successfully in 551 ms (260 modules)
+wait  - compiling /api/auth/[...nextauth] (server only)...
+event - compiled successfully in 172 ms (280 modules)
