@@ -4,13 +4,13 @@ import Feed from '@/components/Feed';
 
 function StatCard({ label, value, sub, color, icon }) {
   return (
-    <div className={`rounded-2xl p-5 ${color}`}>
-      <div className="flex items-center justify-between mb-3">
+    <div className={`rounded-[1.75rem] border border-slate-200 p-5 shadow-sm ${color}`}>
+      <div className="mb-3 flex items-center justify-between">
         <span className="text-2xl">{icon}</span>
-        <p className="text-3xl font-bold">{value}</p>
+        <p className="text-3xl font-semibold tracking-tight">{value}</p>
       </div>
       <p className="text-sm font-semibold">{label}</p>
-      {sub && <p className="text-xs opacity-70 mt-0.5">{sub}</p>}
+      {sub && <p className="mt-0.5 text-xs opacity-70">{sub}</p>}
     </div>
   );
 }
@@ -71,22 +71,22 @@ export default function ClerkDashboard({ cases, userEmail, userName }) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.9),_rgba(241,245,249,1))]">
       {/* Header */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <div className="border-b border-slate-200 bg-[#0f172a] text-white">
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
             <div>
-              <p className="text-slate-500 text-xs uppercase tracking-widest font-medium mb-1">
+              <p className="mb-1 text-xs font-medium uppercase tracking-[0.26em] text-slate-400">
                 {new Date().toLocaleDateString('en-UG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
               </p>
-              <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">
-                Court Registry — <span className="text-blue-600">Overview</span>
+              <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+                Court Registry — <span className="text-blue-400">Overview</span>
               </h1>
-              <p className="text-slate-500 text-sm mt-1">Clerk · {userName} · Lwengo Grade I Magistrate&apos;s Court</p>
+              <p className="mt-1 text-sm text-slate-300">Clerk · {userName} · Lwengo Grade I Magistrate&apos;s Court</p>
             </div>
             <Link href="/dashboard/AddCases">
-              <a className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-medium px-5 py-3 rounded-xl transition-colors text-sm w-fit">
+              <a className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-900 transition-transform duration-200 hover:scale-[1.02] hover:bg-slate-100">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
@@ -97,7 +97,7 @@ export default function ClerkDashboard({ cases, userEmail, userName }) {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+      <div className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6">
 
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -111,14 +111,17 @@ export default function ClerkDashboard({ cases, userEmail, userName }) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
           {/* Unscheduled cases */}
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm">
-            <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
-              <h2 className="text-base font-semibold text-slate-800">Needs Scheduling</h2>
+          <div className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-sm">
+            <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50/80 px-5 py-4">
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-400">Registry Queue</p>
+                <h2 className="mt-1 text-base font-semibold text-slate-900">Needs Scheduling</h2>
+              </div>
               {unscheduled.length > 0 && (
                 <span className="bg-amber-100 text-amber-700 text-xs font-bold px-2 py-0.5 rounded-full">{unscheduled.length}</span>
               )}
             </div>
-            <div className="px-5 py-2 max-h-72 overflow-y-auto">
+            <div className="max-h-72 px-5 py-2 overflow-y-auto">
               {unscheduled.length === 0 ? (
                 <p className="text-slate-400 text-sm py-6 text-center">All cases have hearing dates. ✅</p>
               ) : (
@@ -133,14 +136,17 @@ export default function ClerkDashboard({ cases, userEmail, userName }) {
           </div>
 
           {/* Today's schedule */}
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm">
-            <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
-              <h2 className="text-base font-semibold text-slate-800">Today&apos;s Court Schedule</h2>
+          <div className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-sm">
+            <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50/80 px-5 py-4">
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-400">Daily List</p>
+                <h2 className="mt-1 text-base font-semibold text-slate-900">Today&apos;s Court Schedule</h2>
+              </div>
               <span className="text-xs text-slate-400">
                 {new Date().toLocaleDateString('en-UG', { month: 'short', day: 'numeric' })}
               </span>
             </div>
-            <div className="px-5 py-2 max-h-72 overflow-y-auto">
+            <div className="max-h-72 px-5 py-2 overflow-y-auto">
               {todayHearings.length === 0 ? (
                 <p className="text-slate-400 text-sm py-6 text-center">No hearings scheduled for today.</p>
               ) : (
@@ -159,7 +165,7 @@ export default function ClerkDashboard({ cases, userEmail, userName }) {
 
         {/* All cases table with tabs */}
         <section>
-          <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl w-fit mb-4">
+          <div className="mb-4 inline-flex items-center gap-1 rounded-full bg-slate-100 p-1">
             {[
               { key: 'all', label: `All Cases (${cases.length})` },
               { key: 'pending', label: `Pending (${pendingCases.length})` },
@@ -168,7 +174,7 @@ export default function ClerkDashboard({ cases, userEmail, userName }) {
               <button
                 key={t.key}
                 onClick={() => setTab(t.key)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === t.key ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${tab === t.key ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
               >
                 {t.label}
               </button>
