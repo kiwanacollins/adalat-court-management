@@ -1,11 +1,17 @@
+import { useState } from 'react';
 import FeedRow from './FeedRow';
 import Link from 'next/link';
 
-function Feed({ cases, userEmail, userRole }) {
+function Feed({ cases: initialCases, userEmail, userRole }) {
+  const [cases, setCases] = useState(initialCases);
   const isPrivileged = userRole === 'magistrate' || userRole === 'clerk';
   const visibleCases = isPrivileged
     ? cases
     : cases.filter((c) => c.registered_by === userEmail);
+
+  function handleUpdate(uid, updates) {
+    setCases((prev) => prev.map((c) => (c.uid === uid ? { ...c, ...updates } : c)));
+  }
 
   const canAdd = isPrivileged;
 
@@ -65,10 +71,21 @@ function Feed({ cases, userEmail, userRole }) {
             </thead>
             <tbody className="divide-y divide-slate-100">
               {visibleCases.map((item, index) => (
-                <FeedRow key={item._id || item.uid} case={item} number={index} />
+                <FeedRow
+                  key={item._id || item.uid}
+                  case={item}
+                  number={index}
+                  canEdit={isPrivileged}
+                  onUpdate={handleUpdate}
+                />
               ))}
             </tbody>
           </table>
+          {isPrivileged && (
+            <p className="px-4 py-2 text-xs text-slate-400 border-t border-slate-100">
+              Hover a row and click the ✏️ pencil icon to edit inline.
+            </p>
+          )}
         </div>
       )}
     </div>
