@@ -145,8 +145,6 @@ function HomePage() {
           </div>
           <div className="flex gap-6 text-slate-400 text-sm">
             <span>© {new Date().getFullYear()} Lwengo Judiciary</span>
-            <span>|</span>
-            <span>Bashumba Christopher &amp; Ayebare Newton</span>
           </div>
         </div>
       </footer>
