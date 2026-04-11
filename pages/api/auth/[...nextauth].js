@@ -13,10 +13,8 @@ export default NextAuth({
       async authorize(credentials) {
         try {
           const client = await connectToDatabase();
-
           const usersCollection = client.db().collection('users');
 
-          // find user if exists
           const user = await usersCollection.findOne({
             email: credentials.email,
           });
@@ -26,7 +24,6 @@ export default NextAuth({
             throw new Error('No user found!');
           }
 
-          // compare passwords
           const isValid = await verifyPassword(
             credentials.password,
             user.password
@@ -41,6 +38,8 @@ export default NextAuth({
 
           return {
             email: user.email,
+            name: [user.firstName, user.lastName].filter(Boolean).join(' ') || user.email,
+            role: user.role || 'litigant',
           };
         } catch (error) {
           const localUser = await findLocalUserByEmail(credentials.email);
@@ -64,6 +63,7 @@ export default NextAuth({
               [localUser.firstName, localUser.lastName]
                 .filter(Boolean)
                 .join(' ') || localUser.email,
+            role: localUser.role || 'litigant',
           };
         }
       },
@@ -73,4 +73,18 @@ export default NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+  callbacks: {
+    async jwt(token, user) {
+      if (user) {
+        token.role = user.role || 'litigant';
+        token.name = user.name || '';
+      }
+      return token;
+    },
+    async session(session, token) {
+      session.user.role = token.role || 'litigant';
+      if (token.name) session.user.name = token.name;
+      return session;
+    },
+  },
 });

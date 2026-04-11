@@ -42,6 +42,7 @@ export async function createLocalUser({
   password,
   firstName,
   lastName,
+  role,
 }) {
   const users = await readUsers();
   const newUser = {
@@ -50,6 +51,7 @@ export async function createLocalUser({
     password,
     firstName,
     lastName,
+    role: role || 'litigant',
     createdAt: new Date().toISOString(),
   };
 

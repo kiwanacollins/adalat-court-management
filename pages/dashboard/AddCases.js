@@ -1,53 +1,32 @@
 import AddCase from '@/components/AddCase';
-import { connectToDatabase, getAllLawyerProfiles } from '@/helpers/db-utils';
 import { getSession } from 'next-auth/client';
-
 import Head from 'next/head';
 
-function AddCases(props) {
-  const { lawyerNames } = props;
-  const parsedData = JSON.parse(lawyerNames);
+function AddCases() {
   return (
     <>
       <Head>
-        <title>Register Case</title>
-        <meta
-          name="description"
-          content="Adaalat: One step Solution to managing court hearings"
-        />
+        <title>Register Case — E-Judiciary CMS</title>
+        <meta name="description" content="Register a new court case at Lwengo Grade I Magistrate's Court." />
       </Head>
-      <AddCase names={parsedData} />
+      <AddCase />
     </>
   );
 }
 
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
-  // checks for the incoming request and sees whether a session token is available or not and accordingly takes action
 
   if (!session) {
-    return {
-      redirect: {
-        destination: '/auth',
-        permanent: false, // if we want to permanently redirect to auth page or not ?
-      },
-    };
+    return { redirect: { destination: '/auth', permanent: false } };
   }
 
-  const client = await connectToDatabase();
-  const data = await getAllLawyerProfiles(client);
+  const role = session.user.role || 'litigant';
+  if (role !== 'magistrate' && role !== 'clerk') {
+    return { redirect: { destination: '/dashboard', permanent: false } };
+  }
 
-  const lawyerNames = data.map((item) => ({
-    name: item.name,
-  }));
-
-  const stringifiedData = JSON.stringify(lawyerNames);
-
-  return {
-    props: {
-      lawyerNames: stringifiedData,
-    },
-  };
+  return { props: {} };
 }
 
 export default AddCases;

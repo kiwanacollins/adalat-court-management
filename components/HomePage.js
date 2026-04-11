@@ -1,60 +1,31 @@
 import { Fragment } from 'react';
-
 import Image from 'next/image';
 import Link from 'next/link';
 
 function HomePage() {
   return (
     <Fragment>
+      {/* Hero */}
       <section className="px-2 py-20 bg-white md:px-0">
         <div className="container items-center max-w-6xl px-8 mx-auto xl:px-5">
           <div className="flex flex-wrap items-center sm:-mx-3">
             <div className="w-full md:w-1/2 md:px-3">
               <div className="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
-                <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
-                  <span className="block xl:inline">
-                    Court Case Management System:
-                  </span>
-                  <span className="block text-indigo-700 xl:inline">
-                    {' '}
-                    Adaalat
-                  </span>
+                <p className="text-sm font-semibold text-blue-700 uppercase tracking-widest">
+                  Lwengo Grade I Magistrate&apos;s Court — Uganda
+                </p>
+                <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-5xl xl:text-6xl">
+                  <span className="block">E-Judiciary</span>
+                  <span className="block text-blue-700">Case Scheduling System</span>
                 </h1>
                 <p className="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">
-                  A platform to add and manage cases.
+                  A digital platform for efficient court case registration, scheduling, and management — reducing backlog and improving access to justice.
                 </p>
                 <div className="relative flex flex-col sm:flex-row sm:space-x-4">
                   <Link href="/auth">
-                    <a className="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-indigo-700 sm:mb-0 hover:bg-indigo-800 sm:w-auto rounded-2xl">
-                      Get Started Now
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-5 h-5 ml-1"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                      </svg>
-                    </a>
-                  </Link>
-                  <Link href="/developers">
-                    <a className="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-indigo-700 sm:mb-0 hover:bg-indigo-800 sm:w-auto rounded-2xl">
-                      Meet the developers!
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-5 h-5 ml-1"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
+                    <a className="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-blue-700 sm:mb-0 hover:bg-blue-800 sm:w-auto rounded-2xl">
+                      Get Started
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
                       </svg>
@@ -67,7 +38,7 @@ function HomePage() {
               <div className="w-full h-auto overflow-hidden shadow-xl rounded-2xl">
                 <Image
                   src="/hero_img.jpeg"
-                  alt="HERO"
+                  alt="Lwengo Magistrate Court"
                   width="90"
                   height="50"
                   layout="responsive"
@@ -78,191 +49,109 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="py-16 bg-white">
-        <div className="container max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold tracking-tight text-center">
-            Our Features
+      {/* Features */}
+      <section className="py-16 bg-slate-50">
+        <div className="container max-w-6xl mx-auto px-6">
+          <h2 className="text-4xl font-bold tracking-tight text-center text-gray-900">
+            System Features
           </h2>
-          <p className="mt-2 text-lg text-center text-gray-600">
-            Check out our list of awesome features below.
+          <p className="mt-2 text-lg text-center text-gray-500">
+            Designed to modernise case management at Lwengo Grade I Magistrate&apos;s Court.
           </p>
           <div className="grid grid-cols-4 gap-8 mt-10 sm:grid-cols-8 lg:grid-cols-12 sm:px-8 xl:px-0">
-            <div className="relative flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 overflow-hidden bg-gray-100 sm:rounded-xl">
-              <div className="p-3 text-white bg-blue-500 rounded-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-8 h-8 "
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
-                  <path d="M5 8v-3a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2h-5"></path>
-                  <circle cx="6" cy="14" r="3"></circle>
-                  <path d="M4.5 17l-1.5 5l3 -1.5l3 1.5l-1.5 -5"></path>
+
+            <div className="relative flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 overflow-hidden bg-white border border-slate-100 rounded-xl shadow-sm">
+              <div className="p-3 text-white bg-blue-600 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h4 className="text-xl font-medium text-gray-700">Performance</h4>
+              <h4 className="text-xl font-semibold text-gray-800">Smart Scheduling</h4>
               <p className="text-base text-center text-gray-500">
-                The system shall allow several case registration at the same
-                time without downgrading performance.
+                Rule-based hearing scheduling with automatic conflict detection to prevent double-booking and clashes.
               </p>
             </div>
 
-            <div className="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-gray-100 sm:rounded-xl">
-              <div className="p-3 text-white bg-blue-500 rounded-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-8 h-8 "
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M18 8a3 3 0 0 1 0 6"></path>
-                  <path d="M10 8v11a1 1 0 0 1 -1 1h-1a1 1 0 0 1 -1 -1v-5"></path>
-                  <path d="M12 8h0l4.524 -3.77a0.9 .9 0 0 1 1.476 .692v12.156a0.9 .9 0 0 1 -1.476 .692l-4.524 -3.77h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h8"></path>
+            <div className="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-white border border-slate-100 rounded-xl shadow-sm">
+              <div className="p-3 text-white bg-blue-600 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
-              <h4 className="text-xl font-medium text-gray-700">
-                Availability
-              </h4>
+              <h4 className="text-xl font-semibold text-gray-800">Case Registration</h4>
               <p className="text-base text-center text-gray-500">
-                The system shall be available to all court and can be access
-                anywhere.
+                Digitally register criminal, civil, land, and family cases with auto-generated case numbers.
               </p>
             </div>
 
-            <div className="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-gray-100 sm:rounded-xl">
-              <div className="p-3 text-white bg-blue-500 rounded-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-8 h-8 "
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"></polyline>
-                  <line x1="12" y1="12" x2="20" y2="7.5"></line>
-                  <line x1="12" y1="12" x2="12" y2="21"></line>
-                  <line x1="12" y1="12" x2="4" y2="7.5"></line>
-                  <line x1="16" y1="5.25" x2="8" y2="9.75"></line>
+            <div className="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-white border border-slate-100 rounded-xl shadow-sm">
+              <div className="p-3 text-white bg-blue-600 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                 </svg>
               </div>
-              <h4 className="text-xl font-medium text-gray-700">Usability</h4>
+              <h4 className="text-xl font-semibold text-gray-800">Notifications</h4>
               <p className="text-base text-center text-gray-500">
-                The system shall be easy to learn and use by all users including
-                registrar and administrator.
+                In-app alerts keep judicial officers and parties informed of upcoming hearings and status changes.
               </p>
             </div>
 
-            <div className="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-gray-100 sm:rounded-xl">
-              <div className="p-3 text-white bg-blue-500 rounded-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-8 h-8 "
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M8 9l3 3l-3 3"></path>
-                  <line x1="13" y1="15" x2="16" y2="15"></line>
-                  <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+            <div className="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-white border border-slate-100 rounded-xl shadow-sm">
+              <div className="p-3 text-white bg-blue-600 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
-              <h4 className="text-xl font-medium text-gray-700">Security</h4>
+              <h4 className="text-xl font-semibold text-gray-800">Reports & Analytics</h4>
               <p className="text-base text-center text-gray-500">
-                Each user is required to login. The system shall allow people
-                with assigned user names and passwords.
+                Comprehensive dashboards with case summaries, workload distribution, and upcoming hearing calendars.
               </p>
             </div>
 
-            <div className="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-gray-100 sm:rounded-xl">
-              <div className="p-3 text-white bg-blue-500 rounded-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-8 h-8 "
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <line x1="9.5" y1="11" x2="9.51" y2="11"></line>
-                  <line x1="14.5" y1="11" x2="14.51" y2="11"></line>
-                  <path d="M9.5 15a3.5 3.5 0 0 0 5 0"></path>
-                  <path d="M7 5h1v-2h8v2h1a3 3 0 0 1 3 3v9a3 3 0 0 1 -3 3v1h-10v-1a3 3 0 0 1 -3 -3v-9a3 3 0 0 1 3 -3"></path>
+            <div className="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-white border border-slate-100 rounded-xl shadow-sm">
+              <div className="p-3 text-white bg-blue-600 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>
-              <h4 className="text-xl font-medium text-gray-700">Reliability</h4>
+              <h4 className="text-xl font-semibold text-gray-800">Role-Based Access</h4>
               <p className="text-base text-center text-gray-500">
-                The system have low system failure occurrence and low risk. And
-                will not take much time to resolve it.
+                Separate secure access for Magistrates, Court Clerks, and Litigants with appropriate permissions.
               </p>
             </div>
 
-            <div className="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-gray-100 sm:rounded-xl">
-              <div className="p-3 text-white bg-blue-500 rounded-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-8 h-8 "
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <line x1="15" y1="5" x2="15" y2="7"></line>
-                  <line x1="15" y1="11" x2="15" y2="13"></line>
-                  <line x1="15" y1="17" x2="15" y2="19"></line>
-                  <path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2"></path>
+            <div className="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-white border border-slate-100 rounded-xl shadow-sm">
+              <div className="p-3 text-white bg-blue-600 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h4 className="text-xl font-medium text-gray-700">Accuracy</h4>
+              <h4 className="text-xl font-semibold text-gray-800">Mobile Accessible (PWA)</h4>
               <p className="text-base text-center text-gray-500">
-                 The system shall work accurately without high failure or error.
+                Works on smartphones and desktops with offline support, ensuring access even with limited connectivity.
               </p>
             </div>
+
           </div>
         </div>
       </section>
 
-      <div className="bg-gray-900">
-        <footer className="flex flex-wrap items-center justify-between p-3 m-auto">
-          <div className="container mx-auto flex flex-col flex-wrap items-center justify-between">
-            <ul className="flex mx-auto text-white text-center">
-              <li className="p-2 cursor-pointer hover:underline">
-                Terms & Conditions
-              </li>
-              <li className="p-2 cursor-pointer hover:underline">Privacy</li>
-              <li className="p-2 cursor-pointer hover:underline">Cookies</li>
-            </ul>
-            <div className="flex mx-auto text-white text-center">
-              Copyright Adaalat © 2021
-            </div>
+      {/* Footer */}
+      <footer className="bg-[#0f172a] text-white">
+        <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div>
+            <p className="font-bold text-lg">E-Judiciary CMS</p>
+            <p className="text-slate-400 text-sm">Lwengo Grade I Magistrate&apos;s Court, Uganda</p>
           </div>
-        </footer>
-      </div>
+          <div className="flex gap-6 text-slate-400 text-sm">
+            <span>© {new Date().getFullYear()} Lwengo Judiciary</span>
+            <span>|</span>
+            <span>Bashumba Christopher &amp; Ayebare Newton</span>
+          </div>
+        </div>
+      </footer>
     </Fragment>
   );
 }
+
 export default HomePage;

@@ -1,47 +1,22 @@
 import DisplayCaseDetails from '@/components/DisplayCaseDetails';
 import { connectToDatabase } from '@/helpers/db-utils';
-
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { getSession } from 'next-auth/client';
-import toast from 'react-hot-toast';
 
 function CaseDetailsPage(props) {
-  const parsedFees = JSON.parse(props.fees) || {};
   const parsedData = JSON.parse(props.caseDetail);
-
   const router = useRouter();
-
-  // delete case
-  async function deleteHandler(uid) {
-    const response = await fetch('/api/case/deletecase', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(uid),
-    });
-
-    const data = await response.json();
-    console.log(data);
-    router.replace('/dashboard');
-
-    return data;
-  }
 
   return (
     <>
       <Head>
-        <title>Case No : {parsedData.uid}</title>
-        <meta
-          name="description"
-          content="Adaalat: One step Solution to managing court hearings"
-        />
+        <title>{parsedData.case_number || `Case — E-Judiciary CMS`}</title>
+        <meta name="description" content="Case details — E-Judiciary CMS" />
       </Head>
       <DisplayCaseDetails
         caseDetail={parsedData}
-        delete={deleteHandler}
-        fees={parsedFees.fees}
+        userRole={props.userRole}
       />
     </>
   );
@@ -51,42 +26,34 @@ export async function getServerSideProps(context) {
   const caseId = context.params.caseId;
 
   const session = await getSession({ req: context.req });
-  // checks for the incoming request and sees whether a session token is available or not and accordingly takes action
-
   if (!session) {
-    return {
-      redirect: {
-        destination: '/auth',
-        permanent: false, // if we want to permanently redirect to auth page or not ?
-      },
-    };
+    return { redirect: { destination: '/auth', permanent: false } };
   }
 
   const client = await connectToDatabase();
   const db = client.db();
   const response = await db.collection('cases').findOne({ uid: caseId });
-  const stringifiedData = JSON.stringify(response);
+  client.close();
 
-  const parsedData = JSON.parse(stringifiedData);
-
-  // if the user is logged in but tries acceses unauthorized content of any other user
-  if (session.user.email !== parsedData.email) {
-    return {
-      redirect: {
-        destination: '/dashboard',
-        permanent: false, // if we want to permanently redirect to auth page or not ?
-      },
-    };
+  if (!response) {
+    return { redirect: { destination: '/dashboard', permanent: false } };
   }
 
-  const feeResponse = await db
-    .collection('lawyersList')
-    .findOne({ name: parsedData.Lawyer_Name });
-  const stringifyFee = JSON.stringify(feeResponse || {});
+  const stringifiedData = JSON.stringify(response);
+  const parsedData = JSON.parse(stringifiedData);
+
+  const role = session.user.role || 'litigant';
+  const canSeeAll = role === 'magistrate' || role === 'clerk';
+
+  // Litigants can only see cases they registered
+  if (!canSeeAll && parsedData.registered_by !== session.user.email) {
+    return { redirect: { destination: '/dashboard', permanent: false } };
+  }
+
   return {
     props: {
       caseDetail: stringifiedData,
-      fees: stringifyFee,
+      userRole: role,
     },
   };
 }

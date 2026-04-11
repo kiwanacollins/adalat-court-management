@@ -1,12 +1,12 @@
 {
-  "theme_color": "#a982f2",
-  "background_color": "#eac1ef",
+  "theme_color": "#1e3a5f",
+  "background_color": "#f0f4f8",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "Adaalat - A court management system",
-  "short_name": "Adaalat",
-  "description": "A court management system to add, register case, withdraw theme seamlessly.",
+  "name": "E-Judiciary CMS — Lwengo Grade I Magistrate's Court",
+  "short_name": "E-Judiciary",
+  "description": "E-Judiciary Case Scheduling System for Lwengo Grade I Magistrate's Court, Uganda.",
   "icons": [
     {
       "src": "/icon-192x192.png",

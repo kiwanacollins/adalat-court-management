@@ -1,17 +1,16 @@
 import AddCaseForm from './ui/AddCaseForm';
 
-function AddCase(props) {
+function AddCase() {
   return (
-    <section className=" py-1 bg-blueGray-50">
-      <div className="w-full lg:w-8/12 px-4 mx-auto mt-6">
-        <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
-          <div className="rounded-t bg-white mb-0 px-6 py-6">
-            <div className="text-center flex justify-between">
-              <h6 className="text-blueGray-700 text-xl font-bold">ADD CASE</h6>
-            </div>
+    <section className="min-h-screen bg-slate-50 py-10">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6">
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+          <div className="bg-[#0f172a] px-6 py-5">
+            <h1 className="text-white text-xl font-bold">Register New Case</h1>
+            <p className="text-slate-400 text-sm mt-1">Lwengo Grade I Magistrate&apos;s Court</p>
           </div>
-          <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-            <AddCaseForm names={props.names} />
+          <div className="px-6 py-8">
+            <AddCaseForm />
           </div>
         </div>
       </div>
