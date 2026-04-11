@@ -52,20 +52,26 @@ function TodaySlot({ c }) {
   );
 }
 
-export default function ClerkDashboard({ cases, userEmail, userName }) {
+export default function ClerkDashboard({ cases: initialCases, userEmail, userName }) {
+  const [allCases, setAllCases] = useState(initialCases);
+
+  function handleCaseUpdate(uid, updates) {
+    setAllCases((prev) => prev.map((c) => (c.uid === uid ? { ...c, ...updates } : c)));
+  }
+
   const today = new Date().toISOString().split('T')[0];
 
-  const totalCases = cases.length;
-  const pendingCases = cases.filter((c) => c.status === 'Pending');
-  const unscheduled = cases.filter((c) => c.status === 'Pending' && !c.hearing_date);
-  const urgentCases = cases.filter((c) => c.priority === 'Urgent' && !['Concluded', 'Dismissed'].includes(c.status));
-  const todayHearings = cases
+  const totalCases = allCases.length;
+  const pendingCases = allCases.filter((c) => c.status === 'Pending');
+  const unscheduled = allCases.filter((c) => c.status === 'Pending' && !c.hearing_date);
+  const urgentCases = allCases.filter((c) => c.priority === 'Urgent' && !['Concluded', 'Dismissed'].includes(c.status));
+  const todayHearings = allCases
     .filter((c) => c.hearing_date === today && ['Scheduled', 'Adjourned'].includes(c.status))
     .sort((a, b) => (a.hearing_time || '').localeCompare(b.hearing_time || ''));
 
   const [tab, setTab] = useState('all');
   const tabCases = {
-    all: cases,
+    all: allCases,
     pending: pendingCases,
     urgent: urgentCases,
   };
@@ -167,7 +173,7 @@ export default function ClerkDashboard({ cases, userEmail, userName }) {
         <section>
           <div className="mb-4 inline-flex items-center gap-1 rounded-full bg-slate-100 p-1">
             {[
-              { key: 'all', label: `All Cases (${cases.length})` },
+              { key: 'all', label: `All Cases (${allCases.length})` },
               { key: 'pending', label: `Pending (${pendingCases.length})` },
               { key: 'urgent', label: `Urgent (${urgentCases.length})` },
             ].map((t) => (
@@ -180,7 +186,7 @@ export default function ClerkDashboard({ cases, userEmail, userName }) {
               </button>
             ))}
           </div>
-          <Feed cases={tabCases[tab]} userEmail={userEmail} userRole="clerk" />
+          <Feed key={tab} cases={tabCases[tab]} userEmail={userEmail} userRole="clerk" onCaseUpdate={handleCaseUpdate} />
         </section>
       </div>
     </div>

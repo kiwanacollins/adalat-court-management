@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Link from 'next/link';
 import { STATUS_COLORS } from '@/components/CaseStatusActions';
 
@@ -101,7 +102,8 @@ function NextHearingBanner({ c }) {
   );
 }
 
-export default function LitigantDashboard({ cases, userEmail, userName }) {
+export default function LitigantDashboard({ cases: initialCases, userEmail, userName }) {
+  const [cases, setCases] = useState(initialCases);
   const today = new Date().toISOString().split('T')[0];
 
   const activeCases = cases.filter((c) => !['Concluded', 'Dismissed'].includes(c.status));

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import FeedRow from './FeedRow';
 import Link from 'next/link';
 
-function Feed({ cases: initialCases, userEmail, userRole }) {
+function Feed({ cases: initialCases, userEmail, userRole, onCaseUpdate }) {
   const [cases, setCases] = useState(initialCases);
   const isPrivileged = userRole === 'magistrate' || userRole === 'clerk';
   const visibleCases = isPrivileged
@@ -11,6 +11,7 @@ function Feed({ cases: initialCases, userEmail, userRole }) {
 
   function handleUpdate(uid, updates) {
     setCases((prev) => prev.map((c) => (c.uid === uid ? { ...c, ...updates } : c)));
+    if (onCaseUpdate) onCaseUpdate(uid, updates);
   }
 
   const canAdd = isPrivileged;

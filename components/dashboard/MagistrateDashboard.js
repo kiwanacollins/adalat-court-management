@@ -37,7 +37,13 @@ function HearingCard({ c }) {
   );
 }
 
-export default function MagistrateDashboard({ cases: allCases, userName, userEmail }) {
+export default function MagistrateDashboard({ cases: initialCases, userName, userEmail }) {
+  const [allCases, setAllCases] = useState(initialCases);
+
+  function handleCaseUpdate(uid, updates) {
+    setAllCases((prev) => prev.map((c) => (c.uid === uid ? { ...c, ...updates } : c)));
+  }
+
   const today = new Date().toISOString().split('T')[0];
   const next7 = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
 
@@ -124,9 +130,11 @@ export default function MagistrateDashboard({ cases: allCases, userName, userEma
             ))}
           </div>
           <Feed
+            key={tab}
             cases={tab === 'assigned' ? myCases : pendingCases}
             userEmail={userEmail}
             userRole="magistrate"
+            onCaseUpdate={handleCaseUpdate}
           />
         </section>
       </div>
