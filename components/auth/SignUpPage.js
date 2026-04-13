@@ -1,4 +1,3 @@
-import { signin } from 'next-auth/client';
 import { useRef, useState } from 'react';
 
 import toast from 'react-hot-toast';
@@ -157,17 +156,6 @@ function SignUpPage(props) {
       </form>
 
       {isInvalid && <p className="text-red-500 text-center">Please enter valid information!</p>}
-
-      <div className="flex items-center justify-center">
-        <div className="relative w-full lg:w-6/12 xl:w-5/12 px-10 lg:px-16 xl:px-24 pb-10">
-          <button
-            onClick={signin}
-            className="inline-block w-full px-5 py-4 mt-3 text-lg font-bold text-center text-gray-900 transition duration-200 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 ease"
-          >
-            Sign up with Google
-          </button>
-        </div>
-      </div>
     </section>
   );
 }

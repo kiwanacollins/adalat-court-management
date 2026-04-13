@@ -1,4 +1,4 @@
-import { signin, signIn } from 'next-auth/client';
+import { signIn } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
 
@@ -91,17 +91,6 @@ function LoginPage() {
           </div>
         </div>
       </form>
-      <hr className="border-blueGray-300" />
-      <div className="flex  items-center justify-center ">
-        <div className="relative w-3/12 ">
-          <button
-            onClick={signin}
-            className="inline-block w-full px-5 py-4 mt-3 text-lg font-bold text-center text-gray-900 transition duration-200 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 ease"
-          >
-            Login with Google
-          </button>
-        </div>
-      </div>
     </section>
   );
 }
