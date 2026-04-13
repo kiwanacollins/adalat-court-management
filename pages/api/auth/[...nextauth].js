@@ -5,8 +5,12 @@ import NextAuth from 'next-auth';
 import Providers from 'next-auth/providers';
 
 export default NextAuth({
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     jwt: true,
+  },
+  jwt: {
+    secret: process.env.NEXTAUTH_SECRET,
   },
   providers: [
     Providers.Credentials({
@@ -82,6 +86,9 @@ export default NextAuth({
       return token;
     },
     async session(session, token) {
+      if (!session.user) {
+        session.user = {};
+      }
       session.user.role = token.role || 'litigant';
       if (token.name) session.user.name = token.name;
       return session;

@@ -2,15 +2,42 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Feed from '@/components/Feed';
 
-function StatCard({ label, value, sub, color, icon }) {
+const STAT_TONES = {
+  blue: {
+    card: 'border-blue-200/80 bg-white',
+    chip: 'bg-blue-50 text-blue-700 ring-blue-100',
+    value: 'text-slate-900',
+  },
+  amber: {
+    card: 'border-amber-200/80 bg-white',
+    chip: 'bg-amber-50 text-amber-700 ring-amber-100',
+    value: 'text-slate-900',
+  },
+  indigo: {
+    card: 'border-indigo-200/80 bg-white',
+    chip: 'bg-indigo-50 text-indigo-700 ring-indigo-100',
+    value: 'text-slate-900',
+  },
+  red: {
+    card: 'border-red-200/80 bg-white',
+    chip: 'bg-red-50 text-red-700 ring-red-100',
+    value: 'text-slate-900',
+  },
+};
+
+function StatCard({ label, value, sub, tone = 'blue', icon }) {
+  const styles = STAT_TONES[tone] || STAT_TONES.blue;
+
   return (
-    <div className={`rounded-[1.75rem] border border-slate-200 p-5 shadow-sm ${color}`}>
-      <div className="mb-3 flex items-center justify-between">
-        <span className="text-2xl">{icon}</span>
-        <p className="text-3xl font-semibold tracking-tight">{value}</p>
+    <div className={`rounded-[1.5rem] border p-5 shadow-[0_14px_40px_rgba(15,23,42,0.06)] ${styles.card}`}>
+      <div className="mb-4 flex items-start justify-between gap-3">
+        <span className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl text-xl ring-1 ${styles.chip}`}>
+          {icon}
+        </span>
+        <p className={`text-3xl font-semibold tracking-tight ${styles.value}`}>{value}</p>
       </div>
-      <p className="text-sm font-semibold">{label}</p>
-      {sub && <p className="mt-0.5 text-xs opacity-70">{sub}</p>}
+      <p className="text-sm font-semibold text-slate-800">{label}</p>
+      {sub && <p className="mt-1 text-xs text-slate-500">{sub}</p>}
     </div>
   );
 }
@@ -107,10 +134,10 @@ export default function ClerkDashboard({ cases: initialCases, userEmail, userNam
 
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatCard label="Total Cases" value={totalCases} color="bg-blue-600 text-white" icon="📋" />
-          <StatCard label="Unscheduled" value={unscheduled.length} sub="Pending scheduling" color={unscheduled.length > 0 ? 'bg-amber-500 text-white' : 'bg-slate-100 text-slate-700'} icon="📌" />
-          <StatCard label="Today's Court" value={todayHearings.length} sub="Hearings today" color="bg-indigo-600 text-white" icon="⚖️" />
-          <StatCard label="Urgent" value={urgentCases.length} sub="Require attention" color={urgentCases.length > 0 ? 'bg-red-600 text-white' : 'bg-slate-100 text-slate-700'} icon="🔴" />
+          <StatCard label="Total Cases" value={totalCases} tone="blue" icon="📋" />
+          <StatCard label="Unscheduled" value={unscheduled.length} sub="Pending scheduling" tone="amber" icon="📌" />
+          <StatCard label="Today's Court" value={todayHearings.length} sub="Hearings today" tone="indigo" icon="⚖️" />
+          <StatCard label="Urgent" value={urgentCases.length} sub="Require attention" tone="red" icon="🔴" />
         </div>
 
         {/* Two-column layout: unscheduled + today */}

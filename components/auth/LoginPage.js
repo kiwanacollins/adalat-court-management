@@ -1,12 +1,9 @@
 import { signIn } from 'next-auth/client';
-import { useRouter } from 'next/router';
 import { useRef } from 'react';
 
 import toast from 'react-hot-toast';
 
 function LoginPage() {
-  const router = useRouter();
-
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
 
@@ -22,24 +19,28 @@ function LoginPage() {
 
     const toastId = toast.loading('Loggin In...');
 
-    // never gets rejected, always an object
-    const result = await signIn('credentials', {
-      redirect: false,
-      email: enteredEmail,
-      password: enteredPassword,
-    });
+    try {
+      // Keep redirect false so we can show friendly errors, then hard-redirect on success.
+      const result = await signIn('credentials', {
+        redirect: false,
+        email: enteredEmail,
+        password: enteredPassword,
+      });
 
-    console.log(result);
-    console.log(result.error);
-    if (result.error) {
-      toast.dismiss(toastId);
-      toast.error(result.error);
-    }
+      if (!result || result.error) {
+        toast.dismiss(toastId);
+        toast.error(result?.error || 'Login failed');
+        return;
+      }
 
-    if (!result.error) {
       toast.dismiss(toastId);
-      router.replace('/dashboard');
-      toast.success('Welcome!');
+      toast.success('Welcome! Redirecting...');
+
+      // Hard navigation avoids occasional client-router/session timing issues.
+      window.location.assign('/dashboard');
+    } catch (error) {
+      toast.dismiss(toastId);
+      toast.error('Unable to sign in. Please try again.');
     }
   }
 

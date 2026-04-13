@@ -2,11 +2,6 @@
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Password (all accounts): Demo12345!
 
-  Cases         : 46  (10 Pending, 12 Scheduled, 7 Adjourned, 12 Concluded, 5 Dismissed)
-  Today hearings: 4
-  Notifications : 32
-  Users         : 23  (5 magistrates, 3 clerks, 15 litigants)
-
   DEMO LOGINS
   ────────────────────────────────────────────────────────────
 
@@ -30,3 +25,6 @@
     litigant05@demo.local               Emmanuel Ssalongo
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+npm run dev -- -p 3001
