@@ -19,15 +19,15 @@ function HearingCard({ c }) {
   const statusColor = STATUS_COLORS[c.status] || 'bg-slate-100 text-slate-700';
   return (
     <Link href={`/dashboard/${c.uid}`}>
-      <a className="block bg-white border border-slate-100 rounded-2xl p-4 hover:border-blue-200 hover:shadow-md transition-all group">
+      <a className="block bg-stone-50 border border-stone-200 rounded-2xl p-4 hover:border-amber-200 hover:shadow-md transition-all group">
         <div className="flex items-start justify-between gap-2 mb-2">
           <span className="text-xs font-mono text-slate-400">{c.case_number}</span>
           <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${statusColor}`}>{c.status}</span>
         </div>
-        <p className="font-semibold text-slate-800 text-sm group-hover:text-blue-600 transition-colors">{c.case_type}</p>
+        <p className="font-semibold text-slate-800 text-sm group-hover:text-amber-700 transition-colors">{c.case_type}</p>
         <p className="text-slate-500 text-xs mt-1">{c.complainant_name} <span className="text-slate-300">vs</span> {c.respondent_name}</p>
         <div className="flex items-center gap-2 mt-3 pt-3 border-t border-slate-100">
-          <svg className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <span className="text-xs text-slate-500">{c.hearing_time || 'Time TBD'} · {c.courtroom || 'Room TBD'}</span>
@@ -63,27 +63,27 @@ export default function MagistrateDashboard({ cases: initialCases, userName, use
   const pendingCases = myCases.filter((c) => c.status === 'Pending');
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-stone-50">
       {/* Header */}
-      <div className="bg-[#0f172a]">
+      <div className="border-b border-stone-800/40 bg-[linear-gradient(135deg,#0f172a_0%,#111827_55%,#1c1917_100%)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-          <p className="text-gray-300 text-xs uppercase tracking-widest mb-1">
+          <p className="text-stone-400 text-xs uppercase tracking-widest mb-1">
             {new Date().toLocaleDateString('en-UG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
-          <h1 className="text-white text-2xl sm:text-3xl font-bold">
+          <h1 className="text-stone-50 text-2xl sm:text-3xl font-bold">
             Good {new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 17 ? 'afternoon' : 'evening'},{' '}
-            <span className="text-blue-400">{userName.split(' ')[0]}</span>
+            <span className="text-amber-300">{userName.split(' ')[0]}</span>
           </h1>
-          <p className="text-gray-200 text-sm mt-1">Magistrate · Lwengo Grade I Magistrate&apos;s Court</p>
+          <p className="text-stone-300 text-sm mt-1">Magistrate · Lwengo Grade I Magistrate&apos;s Court</p>
         </div>
 
         {/* Stat strip */}
-        <div className="border-t border-gray-700">
+        <div className="border-t border-stone-800/60">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <StatCard label="Assigned Cases" value={myCases.length} color="bg-blue-900/50 text-white" icon="📁" />
-            <StatCard label="Today's Hearings" value={todayHearings.length} color="bg-amber-900/50 text-white" icon="⚖️" />
-            <StatCard label="Next 7 Days" value={upcomingCount} color="bg-indigo-900/50 text-white" icon="📅" />
-            <StatCard label="Urgent Cases" value={urgentCount} color={urgentCount > 0 ? 'bg-red-900/50 text-white' : 'bg-slate-700/50 text-white'} icon="🔴" />
+            <StatCard label="Assigned Cases" value={myCases.length} color="bg-stone-800/55 text-stone-50" icon="📁" />
+            <StatCard label="Today's Hearings" value={todayHearings.length} color="bg-amber-900/45 text-stone-50" icon="⚖️" />
+            <StatCard label="Next 7 Days" value={upcomingCount} color="bg-emerald-900/45 text-stone-50" icon="📅" />
+            <StatCard label="Urgent Cases" value={urgentCount} color={urgentCount > 0 ? 'bg-rose-900/45 text-stone-50' : 'bg-stone-700/50 text-stone-50'} icon="🔴" />
           </div>
         </div>
       </div>
@@ -101,7 +101,7 @@ export default function MagistrateDashboard({ cases: initialCases, userName, use
             </h2>
           </div>
           {todayHearings.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-slate-100 p-8 text-center">
+            <div className="bg-stone-50 rounded-2xl border border-stone-200 p-8 text-center">
               <p className="text-3xl mb-2">☀️</p>
               <p className="text-slate-600 font-medium">No hearings scheduled for today</p>
               <p className="text-slate-400 text-sm mt-1">Your calendar is clear.</p>
@@ -115,7 +115,7 @@ export default function MagistrateDashboard({ cases: initialCases, userName, use
 
         {/* Case tabs */}
         <section>
-          <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl w-fit mb-4">
+          <div className="flex items-center gap-1 bg-stone-100 p-1 rounded-xl w-fit mb-4">
             {[
               { key: 'assigned', label: `All Assigned (${myCases.length})` },
               { key: 'pending', label: `Unscheduled (${pendingCases.length})` },
@@ -123,7 +123,7 @@ export default function MagistrateDashboard({ cases: initialCases, userName, use
               <button
                 key={t.key}
                 onClick={() => setTab(t.key)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === t.key ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === t.key ? 'bg-stone-50 text-slate-800 shadow-sm' : 'text-stone-500 hover:text-stone-700'}`}
               >
                 {t.label}
               </button>

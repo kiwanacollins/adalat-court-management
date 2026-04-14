@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 
 const STATUS_COLORS = {
-  Pending: 'bg-slate-100 text-slate-700',
-  Scheduled: 'bg-blue-100 text-blue-700',
+  Pending: 'bg-stone-100 text-stone-700',
+  Scheduled: 'bg-amber-100 text-amber-700',
   Adjourned: 'bg-amber-100 text-amber-700',
   Concluded: 'bg-green-100 text-green-700',
   Dismissed: 'bg-red-100 text-red-700',
